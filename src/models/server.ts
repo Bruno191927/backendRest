@@ -10,9 +10,10 @@ class Server {
         this.port = process.env.PORT || '8000';
     }
     async listen(){
+
         try {
             await AppDataSource.initialize().then(() => {
-                console.log("conect server");
+                console.log("conect database");
             }).catch((err) => {
                 console.log(err);
             });
