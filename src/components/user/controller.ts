@@ -6,16 +6,16 @@ export class UserController{
     async createUser(request:Request,response:Response){
         const dao = new UserDao();
         try {
-            const {user,fullName,password}:any = request.body;
-            const existUser = await dao.findUserByUserName(user);
+            const {username,fullname,password}:any = request.body;
+            const existUser = await dao.findUserByUserName(username);
             if(existUser){
                 return response.status(303).json("User not found");
             }
             else{
                 const userData:IUser = {
-                    fullName,
+                    fullname,
                     password,
-                    user
+                    username
                 };
                 const newUser = await dao.createUser(userData);
                 if(newUser){
@@ -37,7 +37,7 @@ export class UserController{
             const {user,password}:any = request.body;
             const existUser = await dao.verifyUser(user,password);
             if(existUser){
-                return response.status(200).send(existUser.fullName);
+                return response.status(200).send(existUser.fullname);
             }
             else{
                 return response.status(404).send("User not found or email or passwor incorrect");

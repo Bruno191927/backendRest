@@ -3,18 +3,13 @@ import { AppDataSource } from '../services/database/database';
 import routes from '../routes/index';
 import { error404Handler, errorHandler } from '../middleware/index';
 class Server {
-
     private app: Application;
     private port: string;
     constructor(){
         this.app = express();
         this.port = process.env.PORT || '8000';
     }
-
-
     async listen(){
-
-        
         try {
             await AppDataSource.initialize().then(() => {
                 console.log("conect server");

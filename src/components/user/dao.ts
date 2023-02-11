@@ -8,8 +8,8 @@ export class UserDao {
     async createUser(user:IUser){
         try {
             const userModel = new User()
-            userModel.fullName = user.fullName;
-            userModel.user = user.user;
+            userModel.fullname = user.fullname;
+            userModel.username = user.username;
             userModel.password = bcrypt.hashSync(user.password, 12);
             return await userModel.save();
         } catch (error) {
@@ -17,9 +17,9 @@ export class UserDao {
         }
     }
 
-    async findUserByUserName(user:string){
+    async findUserByUserName(username:string){
         try {
-            const existUser = await User.findOneBy({user:user});
+            const existUser = await User.findOneBy({username:username});
             return existUser;
         } catch (error) {
             return null;
@@ -31,7 +31,7 @@ export class UserDao {
             const existUser = await this.findUserByUserName(user);
             if(existUser){
                 const validPassword = bcrypt.compareSync(password,existUser.password)
-                if(existUser.user === user && validPassword){
+                if(existUser.username === user && validPassword){
                     return existUser;
                 }
                 return null;

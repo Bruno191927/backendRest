@@ -6,24 +6,13 @@ export class User extends BaseEntity implements IUser{
     @PrimaryGeneratedColumn()
     id?: string;
     @Column({type:'varchar',length:255})
-    user!: string;
+    username!: string;
     @Column({type:'varchar',length:255})
     password!: string;
     @Column({type:'varchar',length:255})
-    fullName!: string;
-    @CreateDateColumn({type:'datetime'})
+    fullname!: string;
+    @Column({type:'datetime'})
     createdAt!: Date;
-    @UpdateDateColumn({type:'datetime'})
+    @Column({type:'datetime'})
     updatedAt!: Date;
-
-    @BeforeInsert()
-    insertCreated(){
-        this.createdAt = new Date(Date.now());
-        this.updatedAt = new Date(Date.now()); 
-    }
-
-    @BeforeUpdate()
-    insertUpdated(){
-        this.updatedAt = new Date(Date.now()); 
-    }
 }
