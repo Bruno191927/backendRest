@@ -18,4 +18,4 @@
     ├── .env # variables de entorno
     ```
 3. Documentacion
-
+    - Puede encontrar los endpoint en la carpeta docs con un archivo postman
